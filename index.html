@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Age calculator app</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="input-menu">
+          <div class="input-box">
+            <label for="input-day" class="label-day">Day</label>
+            <input type="number" title="day" id="input-day" placeholder="DD" />
+            <p id="error-day" class="error-message"></p>
+          </div>
+
+          <div class="input-box">
+            <label for="input-month" class="label-month">Month</label>
+            <input type="number" title="day" id="input-month" placeholder="MM" />
+            <p id="error-month" class="error-message"></p>
+          </div>
+
+          <div class="input-box">
+            <label for="input-year" class="label-year">Year</label>
+            <input type="number" title="day" id="input-year" placeholder="YYYY" />
+            <p id="error-year" class="error-message"></p>
+          </div>
+        </div>
+
+        <div class="divider">
+          <div class="horizontal"></div>
+          <img
+            class="arrowBtn"
+            src="./assets/images/icon-arrow.svg"
+            alt="arrow-icon"
+          />
+        </div>
+
+        <div class="result">
+          <p class="age"><span class="result--year">--</span> years</p>
+          <p class="age"><span class="result--month">--</span> months</p>
+          <p class="age"><span class="result--days">--</span> days</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
