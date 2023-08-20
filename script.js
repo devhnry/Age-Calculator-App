@@ -163,41 +163,44 @@ btn.addEventListener("click", () => {
   let month = Number(validateMonth(inputMonth)) - 1;
   let day = Number(validateDay(inputDay));
 
-  let daysBetween = getDaysTillNow(year, month, day);
-  let resultYr = 0;
+  if(inputDay.value !== "" && inputMonth.value !== "" &&inputYear.value !== ""){
+    let daysBetween = getDaysTillNow(year, month, day);
+    let resultYr = 0;
 
-  const maxDaysInMonth = [
-    31,
-    isLeapYear(year) ? 29 : 28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31,
-  ];
+    const maxDaysInMonth = [
+      31,
+      isLeapYear(year) ? 29 : 28,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31,
+    ];
 
-  while (daysBetween > 365 + (isLeapYear(year) ? 1 : 0)) {
-    daysBetween -= 365 + (isLeapYear(year) ? 1 : 0);
-    year++;
-    resultYr++;
-  }
+    while (daysBetween > 365 + (isLeapYear(year) ? 1 : 0)) {
+      daysBetween -= 365 + (isLeapYear(year) ? 1 : 0);
+      year++;
+      resultYr++;
+    }
 
-  let resultM = 0;
-  while (daysBetween > maxDaysInMonth[month]) {
-    daysBetween -= maxDaysInMonth[month];
-    month++;
-    resultM++;
-  }
+    let resultM = 0;
+    while (daysBetween > maxDaysInMonth[month]) {
+      daysBetween -= maxDaysInMonth[month];
+      month++;
+      resultM++;
+    }
 
-  let resultD = daysBetween;
-  countTo(resultYr, resultYear, () => {
-    countTo(resultM, resultMonth, () => {
-      countTo(resultD, resultDay);
+    let resultD = daysBetween;
+    countTo(resultYr, resultYear, () => {
+      countTo(resultM, resultMonth, () => {
+        countTo(resultD, resultDay);
+      });
     });
-  });
+
+  }
 });
