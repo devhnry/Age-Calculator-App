@@ -163,7 +163,14 @@ btn.addEventListener("click", () => {
   let month = Number(validateMonth(inputMonth)) - 1;
   let day = Number(validateDay(inputDay));
 
-  if(inputDay.value !== "" && inputMonth.value !== "" &&inputYear.value !== ""){
+  if (
+    inputDay.value !== "" &&
+    inputMonth.value !== "" &&
+    inputYear.value !== "" &&
+    validateYear(inputYear) &&
+    validateDay(inputDay) &&
+    validateMonth(inputMonth)
+  ) {
     let daysBetween = getDaysTillNow(year, month, day);
     let resultYr = 0;
 
@@ -201,6 +208,5 @@ btn.addEventListener("click", () => {
         countTo(resultD, resultDay);
       });
     });
-
   }
 });
