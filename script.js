@@ -33,11 +33,9 @@ const validateNumber = (element, maxValue) => {
     }
     if (/^[0-9]$/.test(e.key)) {
       input += e.key;
-      console.log(input);
     }
     if (e.key === "Backspace") {
       input = input.slice(0, -1);
-      console.log(input);
     }
   });
 };
