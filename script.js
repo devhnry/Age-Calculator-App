@@ -146,16 +146,16 @@ const validateDay = (element) => {
   }
 };
 
-function getDaysTillNow(year, month, day) {
-  const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
-  const startTimestamp = new Date(year, month, day).getTime();
-  const endTimestamp = new Date().getTime();
+// function getDaysTillNow(year, month, day) {
+//   const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+//   const startTimestamp = new Date(year, month, day).getTime();
+//   const endTimestamp = new Date().getTime();
 
-  const daysDiff = Math.round(
-    Math.abs((endTimestamp - startTimestamp) / oneDay)
-  );
-  return daysDiff;
-}
+//   const daysDiff = Math.round(
+//     Math.abs((endTimestamp - startTimestamp) / oneDay)
+//   );
+//   return daysDiff;
+// }
 
 function countTo(endNo, element, callback) {
   let start = 0;
@@ -178,6 +178,8 @@ function countTo(endNo, element, callback) {
   }, 100);
 }
 
+// ... (previous code)
+
 btn.addEventListener("click", () => {
   let year = Number(validateYear(inputYear));
   let month = Number(validateMonth(inputMonth)) - 1;
@@ -191,8 +193,12 @@ btn.addEventListener("click", () => {
     validateDay(inputDay) &&
     validateMonth(inputMonth)
   ) {
-    let daysBetween = getDaysTillNow(year, month, day);
-    let resultYr = 0;
+    const selectedDate = new Date(year, month, day);
+    const currentDate = new Date();
+    const daysBetween = Math.floor((currentDate - selectedDate) / (1000 * 60 * 60 * 24));
+
+    let resultYr = Math.floor(daysBetween / 365);
+    daysBetween -= resultYr * 365;
 
     const maxDaysInMonth = [
       31,
@@ -209,20 +215,15 @@ btn.addEventListener("click", () => {
       31,
     ];
 
-    while (daysBetween > 365 + (isLeapYear(year) ? 1 : 0)) {
-      daysBetween -= 365 + (isLeapYear(year) ? 1 : 0);
-      year++;
-      resultYr++;
-    }
-
     let resultM = 0;
-    while (daysBetween > maxDaysInMonth[month]) {
+    while (daysBetween >= maxDaysInMonth[month]) {
       daysBetween -= maxDaysInMonth[month];
       month++;
       resultM++;
     }
 
     let resultD = daysBetween;
+
     countTo(resultYr, resultYear, () => {
       countTo(resultM, resultMonth, () => {
         countTo(resultD, resultDay);
