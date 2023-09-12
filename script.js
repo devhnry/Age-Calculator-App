@@ -92,11 +92,7 @@ const validateMonth = (element) => {
   validateNonEmptyField(element, lblMonth, errMonth, "This field is required");
   if (element.value != "") {
     if (element.value >= 1 && element.value <= 12) {
-      if (element.value > curMonth) {
-        invalidInput(element, lblMonth, errMonth, "Must be in the past");
-      } else {
         return element.value;
-      }
     } else {
       invalidInput(element, lblMonth, errMonth, "Not a valid Month");
     }
