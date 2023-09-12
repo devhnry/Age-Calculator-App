@@ -92,7 +92,7 @@ const validateMonth = (element) => {
   validateNonEmptyField(element, lblMonth, errMonth, "This field is required");
   if (element.value != "") {
     if (element.value >= 1 && element.value <= 12) {
-        return element.value;
+      return element.value;
     } else {
       invalidInput(element, lblMonth, errMonth, "Not a valid Month");
     }
@@ -109,6 +109,8 @@ const validateMonth = (element) => {
 const validateDay = (element) => {
   validateNonEmptyField(element, lblDay, errDay, "This field is required");
   let mth = Number(inputMonth.value);
+  let yr = Number(inputYear.value);
+
   if (element.value != "") {
     let maxDays;
     if (mth === 4 || mth === 6 || mth === 9 || mth === 12) {
@@ -119,12 +121,14 @@ const validateDay = (element) => {
       maxDays = 31;
     }
 
-    if (element.value >= 1 && element.value <= maxDays) {
-      if (mth === curMonth && element.value > curDay) {
-        invalidInput(element, lblDay, errDay, "Must be in the past");
-      } else {
-        return element.value;
-      }
+    if (
+      yr > curYear ||
+      (yr === curYear && mth > curMonth) ||
+      (yr === curYear && mth === curMonth && element.value > curDay)
+    ) {
+      invalidInput(element, lblDay, errDay, "Must be in the past");
+    } else if (element.value >= 1 && element.value <= maxDays) {
+      return element.value;
     } else {
       invalidInput(element, lblDay, errDay, "Not a valid Day");
       if (
